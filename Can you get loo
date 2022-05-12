@@ -1,0 +1,29 @@
+You are given a node that is the beginning of a linked list. This list always contains a tail and a loop. Your objective is to determine the length of the loop.
+
+For example in the following picture the tail's size is 3 and the loop size is 12:
+
+int getLoopSize(Node* startNode)
+{
+  Node* temp=startNode;  
+  std::vector<Node*> nodes;
+  int size=0;
+
+    while (true){
+      if(std::find(nodes.begin(),nodes.end(),temp) == nodes.end()){
+        nodes.push_back(temp);
+        temp=temp->
+        getNext();
+        size++;
+      }
+      else {
+        for (int i= 0 ; i < size ; i++){
+          if(nodes.at(i) == temp){
+            return size-i;
+          }
+        }
+      }
+            
+      
+    }
+ 
+}
