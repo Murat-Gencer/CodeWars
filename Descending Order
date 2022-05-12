@@ -1,0 +1,40 @@
+Your task is to make a function that can take any non-negative integer as an argument and return it with its digits in descending order. 
+Essentially, rearrange the digits to create the highest possible number.
+
+#include <cinttypes>
+#include <cmath>
+uint64_t descendingOrder(uint64_t a)
+{
+  uint64_t temp=a;
+  int i = 0 ;
+  while(temp> 0){
+      i++;
+      temp/=10;
+  } 
+  uint64_t nums[i];
+  for(int k=0 ; k < i ; k++){
+    nums[k]=a%10;
+    a/=10;
+  }
+  temp=0;
+  for(int n=0;n<i;n++)
+  {   
+    for(int j=n+1;j<i;j++)
+    {
+      if(nums[n]<nums[j])
+      {
+        temp  =nums[n];
+        nums[n]=nums[j];
+        nums[j]=temp;
+      }
+    }
+  }
+  
+  uint64_t ra=0;
+  for(int k = 0 ; k < i ; k++){
+    printf("%lu ", nums[k]);
+    ra+=nums[k]*(uint64_t)pow(10.0,(double) (i-k-1));
+    printf("%lu ",ra);
+  }
+  return ra;
+}
