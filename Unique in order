@@ -1,0 +1,44 @@
+Implement the function unique_in_order which takes as argument a sequence and returns a list of items without any elements with the same value next to each other and preserving the original order of elements.
+
+For example:
+
+uniqueInOrder("AAAABBBCCDAABBB") == {'A', 'B', 'C', 'D', 'A', 'B'}
+uniqueInOrder("ABBCcAD")         == {'A', 'B', 'C', 'c', 'A', 'D'}
+uniqueInOrder([1,2,2,3,3])       == {1,2,3}
+
+#include <string>
+#include <vector>
+#include <set>
+#include <iterator>
+
+template <typename T> std::vector<T> uniqueInOrder(const std::vector<T>& iterable) {
+    std::vector<T> reordered;
+    if (iterable.empty())
+        return reordered;
+    int index=0;
+    reordered.push_back(iterable.at(0));
+    for (int i = 1; i < iterable.size(); i++) {
+      if(reordered.at(index) != iterable.at(i)){
+          reordered.push_back(iterable.at(i));
+          index++;
+      }
+      }
+    return reordered;
+}
+std::vector<char> uniqueInOrder(const std::string& iterable) {
+    std::vector<char> reordered;
+    if (iterable.length() == 0)
+        return reordered;
+    int i = 0;
+    for (char c : iterable) {
+        if (i == 0) {
+            reordered.push_back(c);
+            i++;
+        }
+        if (reordered.at(i-1) != c) {
+            reordered.push_back(c);
+            i++;
+        }
+    }
+    return reordered;
+}
